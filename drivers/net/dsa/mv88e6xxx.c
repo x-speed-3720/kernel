@@ -2737,11 +2737,22 @@ static int mv88e6xxx_setup_port(struct mv88e6xxx_priv_state *ps, int port)
 				PORT_PCS_CTRL_LINK_UP |
 				PORT_PCS_CTRL_DUPLEX_FULL |
 				PORT_PCS_CTRL_FORCE_DUPLEX;
-			if (mv88e6xxx_6352_family(ps) || mv88e6xxx_6341_family(ps)) {
+			if (dsa_is_cpu_port(ds, port)) {
+				if (mv88e6xxx_6352_family(ps) || mv88e6xxx_6341_family(ps)) {
 				/* configure RGMII Delay on cpu / dsa port */
 				reg |= PORT_PCS_CTRL_FORCE_SPEED |
 					PORT_PCS_CTRL_RGMII_DELAY_TXCLK |
 					PORT_PCS_CTRL_RGMII_DELAY_RXCLK;
+				}
+			} else {
+				if (ds->index == 1) {
+					if (mv88e6xxx_6352_family(ps)) {
+					/* configure RGMII Delay on cpu / dsa port */
+					reg |= PORT_PCS_CTRL_FORCE_SPEED |
+						PORT_PCS_CTRL_RGMII_DELAY_TXCLK |
+						PORT_PCS_CTRL_RGMII_DELAY_RXCLK;
+					}
+				}
 			}
 			if (mv88e6xxx_6065_family(ps))
 				reg |= PORT_PCS_CTRL_100;

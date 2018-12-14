@@ -4,6 +4,8 @@ dtb-$(CONFIG_ARCH_BERLIN) += berlin4ct-stb.dtb
 
 # Mvebu SoC Family
 dtb-$(CONFIG_ARCH_MVEBU) += armada-3720-db.dtb
+dtb-$(CONFIG_ARCH_MVEBU) += armada-3720-nm01.dtb
+dtb-$(CONFIG_ARCH_MVEBU) += armada-3720-nm02.dtb
 dtb-$(CONFIG_ARCH_MVEBU) += armada-3720-db-B.dtb
 dtb-$(CONFIG_ARCH_MVEBU) += armada-3720-db-C.dtb
 dtb-$(CONFIG_ARCH_MVEBU) += armada-3720-community.dtb
